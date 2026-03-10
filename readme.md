@@ -6,7 +6,7 @@
 
 ## Overview
 
-This project implements a **memory-efficient text file indexing system**
+This program implements a **memory-efficient text file indexing system**
 in C++.\
 The program processes large text files using a **fixed-size buffer**
 instead of loading the entire file into memory.
