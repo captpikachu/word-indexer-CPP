@@ -1,4 +1,4 @@
-# CS253 Assignment 1 -- Memory Efficient File Indexer
+# Memory Efficient File Indexer
 
 **Author:** Yash Bhardwaj
 
