@@ -110,7 +110,7 @@ The file is read chunk-by-chunk using:
     file.read(internal_buf.data(), BUFFER_SIZE);
 
 Characters are examined one by one to detect words and delimiters.\
-Words are converted to lowercase and stored in the frequency map.
+Words are converted to lowercase and stored in the frequency map the map size will increase a number of unique word increase and requiring more memory but still way less than full loading.
 
 This approach allows the program to process **very large files
 efficiently** while keeping memory usage low.
@@ -132,7 +132,7 @@ efficiently** while keeping memory usage low.
 To validate the efficiency of the chunked buffer approach, this system was benchmarked against a **Full Load** script that reads the entire file into memory before tokenization. 
 
 * **Fair Comparison:** To ensure an apples-to-apples comparison, the naive full-load script uses the exact same `map<string, int>` tokenization and indexing logic.
-* **Results:** For a 500 MB text file, the full-load approach requires **>500 MB** of peak RAM. In contrast, this chunked Word Indexer processes the same file using only **~10-12 MB** of peak RAM (saving >97% of memory and upto 99% for small files with less unique words) while maintaining comparable processing speed.
+* **Results:** For a 500 MB text file with 70k unique wordss, the full-load approach requires **>500 MB** of peak RAM. In contrast, this chunked Word Indexer processes the same file using only **~10-12 MB** of peak RAM (saving >97% of memory and upto 99% for small files with less unique words) while maintaining comparable processing speed.
 
 *Note: While the current system only stores word frequency (`map<string, int>`), chunked file reading is still the standard for advanced search indexing. For general-purpose reading where tracking the exact location of a word is required, the data structure can simply be updated to `map<string, vector<int>>` to store byte offsets or line numbers without sacrificing any of the memory benefits.*
 To run the script for complete file loading with similar map structure
