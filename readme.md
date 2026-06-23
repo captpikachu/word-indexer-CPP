@@ -123,6 +123,7 @@ efficiently** while keeping memory usage low.
 -   Word comparison is **case-insensitive**
 -   Buffer size must be between **256KB and 1024KB**
 -   Input files are **plain text files**
+-   Realistically an advanced english speaker knows about 20-25k words suppose he looks every 5th word which he doesn't know that makes about 30k unique words for any usage and thus realistically a file wouldn't have 70k unique words as tested but much lesser than that , for 30k words the memory reduction for 500mb file was 99%.
 
 ------------------------------------------------------------------------
 
@@ -134,3 +135,11 @@ To validate the efficiency of the chunked buffer approach, this system was bench
 * **Results:** For a 500 MB text file, the full-load approach requires **>500 MB** of peak RAM. In contrast, this chunked Word Indexer processes the same file using only **~10-12 MB** of peak RAM (saving >97% of memory and upto 99% for small files with less unique words) while maintaining comparable processing speed.
 
 *Note: While the current system only stores word frequency (`map<string, int>`), chunked file reading is still the standard for advanced search indexing. For general-purpose reading where tracking the exact location of a word is required, the data structure can simply be updated to `map<string, vector<int>>` to store byte offsets or line numbers without sacrificing any of the memory benefits.*
+To run the script for complete file loading with similar map structure
+**Compile:**
+
+    g++ -std=c++17 -O3 -o complete_loading complete_loading.cpp -lpsapi
+
+**Run:**
+
+    ./complete_loading test_500mb.txt
