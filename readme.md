@@ -42,7 +42,7 @@ Displays the most frequent words in a version.
 
 Compile the program using **g++ with C++17**:
 
-    g++ -std=c++17 -O3 -o analyzer main.cpp
+    g++ -std=c++17 -O3 -o analyzer Code.cpp -lpsapi
 
 ------------------------------------------------------------------------
 
