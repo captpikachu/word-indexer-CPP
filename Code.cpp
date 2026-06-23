@@ -1,5 +1,8 @@
 #include <bits/stdc++.h>
 #include <chrono>
+#include <windows.h>
+#include <psapi.h>
+#pragma comment(lib, "psapi.lib")
 
 using namespace std;
 
@@ -191,5 +194,11 @@ int main(int argc, char* argv[]) {
         cerr << "RUNTIME ERROR: " << e.what() << endl;
         return 1;
     }
+
+    PROCESS_MEMORY_COUNTERS pmc;
+if (GetProcessMemoryInfo(GetCurrentProcess(), &pmc, sizeof(pmc))) {
+    cout << "Peak RAM Usage: " << pmc.PeakWorkingSetSize / (1024.0 * 1024.0) << " MB\n";
+}
+
     return 0;
 }   
